@@ -19,6 +19,7 @@
     transition: transform 0.6s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 .flipped_card .flip_card_inner {
@@ -35,27 +36,25 @@
 }
 
 .flip_card_front {
-    background-color: #bbb;
+    background: url("../img/cardbg.jpg");
+    background-size: cover;
     color: black;
 }
 
 .flip_card_back {
-    background-color: #1d3557;
+    background-color: #3f008a;
     color: white;
     transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .flip_card_back p {
-    margin: 30% auto 0 auto;
-    width: 90%;
-    font-family: Montserrat;
     font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
+    font-weight: bold;
+    font-size: 36px;
     line-height: 26px;
-    /* or 144% */
-
     text-align: center;
-
     color: #ffffff;
 }
 .flip_card_front img {

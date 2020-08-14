@@ -30,8 +30,9 @@ class GameField extends React.Component {
         this.setState({ shuffledCards: field });
     }
     resetCards() {
-        for (let i = 0; i < 2; i++) {
-            this.state.cardNodes[i].style.transform = "rotateY(0deg)";
+        let cards = document.getElementsByClassName(cardStyles.flip_card_inner);
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].style.transform = "rotateY(0deg)";
         }
         this.setState({
             compareCards: [],
@@ -39,7 +40,7 @@ class GameField extends React.Component {
         });
     }
 
-    async singleCardClick(e) {
+    singleCardClick(e) {
         if (e.currentTarget.style.transform !== "rotateY(180deg)") {
             e.currentTarget.style.transform = "rotateY(180deg)";
             if (this.state.compareCards.length < 2) {
@@ -50,26 +51,31 @@ class GameField extends React.Component {
                     ],
                     cardNodes: [...this.state.cardNodes, e.currentTarget],
                 });
-                await setTimeout(() => {
+                setTimeout(() => {
                     if (this.state.compareCards.length == 2) {
                         if (
                             this.state.compareCards[0] !==
                             this.state.compareCards[1]
                         ) {
-                            this.resetCards();
+                            setTimeout(() => {
+                                this.resetCards();
+                            }, 500);
                         } else {
-                            for (
-                                let i = 0;
-                                i < this.state.cardNodes.length;
-                                i++
-                            ) {
-                                this.state.cardNodes[
-                                    i
-                                ].parentNode.parentNode.remove();
-                            }
+                            setTimeout(() => {
+                                for (
+                                    let i = 0;
+                                    i < this.state.cardNodes.length;
+                                    i++
+                                ) {
+                                    this.state.cardNodes[
+                                        i
+                                    ].parentNode.parentNode.remove();
+                                }
+                                this.resetCards();
+                            }, 500);
                         }
                     }
-                }, 1300);
+                }, 0);
             } else {
                 this.resetCards();
             }
@@ -97,7 +103,6 @@ class GameField extends React.Component {
                         );
                     })}
                 </table>
-                <h1>FIELD</h1>
             </div>
         );
     }

@@ -10,10 +10,10 @@ const Card = (props) => {
                     data-content={props.content}
                     className={styles.flip_card_inner}
                 >
-                    <div className={styles.flip_card_front}>
-                        <h1></h1>
+                    <div className={styles.flip_card_front}></div>
+                    <div className={styles.flip_card_back}>
+                        <p>{props.content}</p>
                     </div>
-                    <div className={styles.flip_card_back}>{props.content}</div>
                 </div>
             </div>
         </div>
