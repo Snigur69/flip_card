@@ -2,13 +2,14 @@ import React from "react";
 import Card from "./Card";
 import cardStyles from "./Card.module.css";
 import style from "./GameField.module.css";
+import { NavLink } from "react-router-dom";
 
 class GameField extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            size: 4,
-            cards: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8],
+            // size: 4,
+            // cards: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8],
             shuffledCards: [],
             compareCards: [],
             cardNodes: [],
@@ -17,12 +18,12 @@ class GameField extends React.Component {
         this.resetCards = this.resetCards.bind(this);
     }
     componentWillMount() {
-        let shuffledCards = this.state.cards.sort(() => Math.random() - 0.5);
+        let shuffledCards = this.props.cards.sort(() => Math.random() - 0.5);
         let field = [];
         let k = 0;
-        for (let i = 0; i < this.state.size; i++) {
+        for (let i = 0; i < this.props.size; i++) {
             field[i] = [];
-            for (let j = 0; j < this.state.size; j++) {
+            for (let j = 0; j < this.props.size; j++) {
                 field[i][j] = shuffledCards[k];
                 k++;
             }
@@ -38,6 +39,11 @@ class GameField extends React.Component {
             compareCards: [],
             cardNodes: [],
         });
+        if(cards.length === 0) {
+            document.getElementsByClassName(style.gamefield)[0].remove();
+            // console.log( document.getElementsByClassName(style.gamefield_wrap)[0])
+            document.getElementsByClassName(style.gamefield_wrap)[0].append('YOU ARE WON, SON!')
+        }
     }
 
     singleCardClick(e) {
@@ -84,7 +90,7 @@ class GameField extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={style.gamefield_wrap}>
                 <table className={style.gamefield}>
                     {this.state.shuffledCards.map((el) => {
                         return (
@@ -103,6 +109,7 @@ class GameField extends React.Component {
                         );
                     })}
                 </table>
+                <NavLink className={style.back_btn} to="/">Back</NavLink>
             </div>
         );
     }

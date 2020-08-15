@@ -3,19 +3,19 @@ import logo from "./logo.svg";
 import "./App.css";
 import GameField from "./components/GameField";
 import StartWindow from "./components/StartWindow";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
     return (
         <div className="App">
-            <Router>
+            {/* <Router>
                 <Route path="/game">
                     <GameField />
                 </Route>
-                <Route exact path="/">
+                <Route exact path="/"> */}
                     <StartWindow />
-                </Route>
-            </Router>
+                {/* </Route>
+            </Router> */}
         </div>
     );
 }

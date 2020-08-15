@@ -1,0 +1,9 @@
+.navLink > div, .navLink{
+    width: 200px;
+}
+.start_wrap {
+    max-width: 400px;
+    margin: 30px auto;
+    display: flex;
+    
+}
