@@ -69,6 +69,10 @@
     line-height: 50px;
     text-align: center;
     color: #ffffff;
+    transition: 0.3s;
+}
+.flip_card_back a:hover {
+    color: aquamarine;
 }
 .flip_card_front img {
     height: 340px;

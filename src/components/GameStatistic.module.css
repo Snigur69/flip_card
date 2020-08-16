@@ -1,0 +1,13 @@
+.game_stat_wrap {
+    display: flex;
+    max-width: 600px;
+    margin: 40px auto;
+}
+.game_stat_wrap div {
+    margin-right: 40px;
+}
+.back_btn {
+    display: block;
+    font-weight: bold;
+    font-size: 30px;
+}

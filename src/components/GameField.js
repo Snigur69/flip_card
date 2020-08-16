@@ -13,7 +13,9 @@ class GameField extends React.Component {
             shuffledCards: [],
             compareCards: [],
             cardNodes: [],
+            time: 30
         };
+        let timer;
         this.singleCardClick = this.singleCardClick.bind(this);
         this.resetCards = this.resetCards.bind(this);
     }
@@ -29,6 +31,15 @@ class GameField extends React.Component {
             }
         }
         this.setState({ shuffledCards: field });
+        this.timer = setInterval(() => { this.setState({ time: this.state.time - 1 }) }, 1000)
+    }
+    componentWillUpdate() {
+        if ((this.state.time == 0) && (document.getElementsByClassName(cardStyles.flip_card_inner) != 0)) {
+            document.getElementsByClassName(style.gamefield)[0].remove();
+            document.getElementsByClassName(style.gamefield_wrap)[0].append('YOU LOSE, SON!')
+            document.getElementById('timer_title').remove();
+            clearInterval(this.timer);
+        }
     }
     resetCards() {
         let cards = document.getElementsByClassName(cardStyles.flip_card_inner);
@@ -39,10 +50,11 @@ class GameField extends React.Component {
             compareCards: [],
             cardNodes: [],
         });
-        if(cards.length === 0) {
+        if (cards.length === 0) {
             document.getElementsByClassName(style.gamefield)[0].remove();
-            // console.log( document.getElementsByClassName(style.gamefield_wrap)[0])
-            document.getElementsByClassName(style.gamefield_wrap)[0].append('YOU ARE WON, SON!')
+            document.getElementById('timer_title').remove();
+            clearInterval(this.timer);
+            document.getElementsByClassName(style.gamefield_wrap)[0].append('YOU ARE WON, SON!');
         }
     }
 
@@ -91,6 +103,7 @@ class GameField extends React.Component {
     render() {
         return (
             <div className={style.gamefield_wrap}>
+                <h1 id="timer_title">Time left: {this.state.time}</h1>
                 <table className={style.gamefield}>
                     {this.state.shuffledCards.map((el) => {
                         return (
@@ -109,7 +122,7 @@ class GameField extends React.Component {
                         );
                     })}
                 </table>
-                <NavLink className={style.back_btn} to="/">Back</NavLink>
+                <NavLink className={style.back_btn} to="/start">Back</NavLink>
             </div>
         );
     }
